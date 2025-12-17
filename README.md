@@ -84,3 +84,23 @@ let newItem = {...item};
 
 let newItem = {...item, content: "bar"}
 ```
+
+## Service Functions to the Backend
+
+Return a promise
+
+```js
+export const getItems = () => {
+    return axios.get(
+        `${API_BASE_URL}/endpoint`
+    )
+}
+```
+
+Resolve a promise
+
+```js
+getItems().then((payload) => {
+    console.log(payload)
+})
+```
