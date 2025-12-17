@@ -1,0 +1,6 @@
+{
+    "expense_items": [
+        { "id": "abc", "content": "Item A", "amount": 500, "category": "Food" },
+        { "id": "def", "content": "Item B", "amount": 250, "category": "Transportation" }
+    ]
+}
