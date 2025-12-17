@@ -28,4 +28,4 @@ Include a section in your `package.json` file:
 
 ## Create a Build Script (`build.js`) to compile your project
 
-Copy over `build.js` from [https://github.com/Trainocate-PH-Tech/exepensetrackerweb](https://github.com/Trainocate-PH-Tech/exepensetrackerweb) and modify the contents for your project in terms of:
+Copy over `build.js` from [https://github.com/ralampay/admin-panel-web](https://github.com/ralampay/admin-panel-web) and modify the contents for your project in terms of:
