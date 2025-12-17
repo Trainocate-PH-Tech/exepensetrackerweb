@@ -17,3 +17,15 @@ npm install [dependency]
 ```
 
 This will add the dependency in your `package.json` file.
+
+## Make the Project a JS Module
+
+Include a section in your `package.json` file:
+
+```js
+"type": "module"
+```
+
+## Create a Build Script (`build.js`) to compile your project
+
+Copy over `build.js` from [https://github.com/Trainocate-PH-Tech/exepensetrackerweb](https://github.com/Trainocate-PH-Tech/exepensetrackerweb) and modify the contents for your project in terms of:
