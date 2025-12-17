@@ -17,6 +17,7 @@ export default Index = () => {
             {expenseItems.map((expenseItem) => {
                 return (
                     <ExpenseItemCard 
+                        key={expenseItem.id}
                         expenseItem={expenseItem}
                     />
                 )

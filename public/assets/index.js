@@ -24128,7 +24128,7 @@
   // src/services/ExpenseItemsService.js
   var getExpenseItems = () => {
     return axios_default.get(
-      "http://localhost:3000/expense_items"
+      `${"http://localhost:3000"}/expense_items`
     );
   };
 
@@ -24151,6 +24151,7 @@
       return /* @__PURE__ */ import_react4.default.createElement(
         ExpenseItemCard_default,
         {
+          key: expenseItem.id,
           expenseItem
         }
       );
