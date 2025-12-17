@@ -35,3 +35,21 @@ Copy over `build.js` from [https://github.com/ralampay/admin-panel-web](https://
 ```bash
 node build.js --watch --dev
 ```
+
+# Basic Concepts
+
+## Function Declaration and Invocation
+
+```js
+// Declaring a function with a name
+const sayHello = (message) => {
+    console.log(message);
+}
+
+sayHello("Hello world!");
+
+// Calling an anonymous function (no name)
+(() => {
+    alert("Inside the function!");
+})();
+```

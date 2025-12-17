@@ -1,7 +1,7 @@
 {
   "version": 3,
-  "sources": [],
-  "sourcesContent": [],
-  "mappings": "",
+  "sources": ["../../src/index.js"],
+  "sourcesContent": ["// Declaring a function with a name\nconst sayHello = (message) => {\n    console.log(message);\n}\n\nsayHello(\"Hello world!\");\n\n// Calling an anonymous function (no name)\n(() => {\n    alert(\"Inside the function!\");\n})();"],
+  "mappings": ";;AACA,MAAM,WAAW,CAAC,YAAY;AAC1B,YAAQ,IAAI,OAAO;AAAA,EACvB;AAEA,WAAS,cAAc;AAGvB,GAAC,MAAM;AACH,UAAM,sBAAsB;AAAA,EAChC,GAAG;",
   "names": []
 }
