@@ -53,3 +53,34 @@ sayHello("Hello world!");
     alert("Inside the function!");
 })();
 ```
+
+## React Components
+
+Basic Template:
+
+```js
+import React from "react";
+
+export default ComponentName = () => {
+    return (
+        <div>
+            Content
+        </div>
+    )
+}
+```
+
+## Copying Objects
+
+```js
+item = {
+    content: "foo"
+}
+
+// copy the object
+let newItem = {...item};
+
+// copy the object and update an attribute:
+
+let newItem = {...item, content: "bar"}
+```
