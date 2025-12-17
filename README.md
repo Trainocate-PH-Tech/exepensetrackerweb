@@ -10,7 +10,7 @@ npm init
 
 ## Install Dependencies
 
-Dependencies are libraries coming from (https://www.npmjs.com/)[https://www.npmjs.com/]
+Dependencies are libraries coming from [https://www.npmjs.com/](https://www.npmjs.com/)
 
 ```bash
 npm install [dependency]
