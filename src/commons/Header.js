@@ -1,9 +1,9 @@
 import React from "react";
 
-export default Header = () => {
+export default Header = ({ message }) => {
     return (
         <div>
-            This is a header
+            {message}
         </div>
     )
 }

@@ -21457,8 +21457,8 @@
 
   // src/commons/Header.js
   var import_react = __toESM(require_react(), 1);
-  var Header_default = Header = () => {
-    return /* @__PURE__ */ import_react.default.createElement("div", null, "This is a header");
+  var Header_default = Header = ({ message }) => {
+    return /* @__PURE__ */ import_react.default.createElement("div", null, message);
   };
 
   // src/commons/Footer.js
@@ -21469,7 +21469,32 @@
 
   // src/App.js
   var App_default = App = () => {
-    return /* @__PURE__ */ import_react3.default.createElement("div", null, /* @__PURE__ */ import_react3.default.createElement(Header_default, null), "Hello world!", /* @__PURE__ */ import_react3.default.createElement(Footer_default, null));
+    const [counter, setCounter] = import_react3.default.useState(0);
+    const [message, setMessage] = import_react3.default.useState("");
+    return /* @__PURE__ */ import_react3.default.createElement("div", null, /* @__PURE__ */ import_react3.default.createElement(
+      Header_default,
+      {
+        message
+      }
+    ), /* @__PURE__ */ import_react3.default.createElement(
+      "input",
+      {
+        value: message,
+        onChange: (event) => {
+          setMessage(event.target.value);
+        }
+      }
+    ), /* @__PURE__ */ import_react3.default.createElement(
+      "button",
+      {
+        onClick: () => {
+          let _counter = counter;
+          _counter++;
+          setCounter(_counter);
+        }
+      },
+      "Click Me!"
+    ), counter, /* @__PURE__ */ import_react3.default.createElement("hr", null), message, /* @__PURE__ */ import_react3.default.createElement(Footer_default, null));
   };
 
   // src/index.js
