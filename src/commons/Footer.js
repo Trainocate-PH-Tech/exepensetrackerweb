@@ -1,9 +1,16 @@
 import React from "react";
 
-export default Footer = () => {
+export default Footer = ({ item, setItem }) => {
     return (
         <div>
-            This is a footer
+            <input
+                value={item.content}
+                onChange={(event) => {
+                    setItem({...item,
+                        content: event.target.value
+                    });
+                }}
+            />
         </div>
     )
 }

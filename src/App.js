@@ -1,11 +1,13 @@
 import React from "react";
 import Header from "./commons/Header";
 import Footer from "./commons/Footer";
+import { DEFAULT_ITEM } from "./models";
 
 export default App = () => {
     // State counter
     const [counter, setCounter] = React.useState(0);
     const [message, setMessage] = React.useState("");
+    const [item, setItem] = React.useState(DEFAULT_ITEM);
 
     return (
         <div>
@@ -30,7 +32,10 @@ export default App = () => {
             {counter}
             <hr/>
             {message}
-            <Footer/>
+            <Footer
+                item={item}
+                setItem={setItem}
+            />
         </div>
     )
 }

@@ -21463,14 +21463,31 @@
 
   // src/commons/Footer.js
   var import_react2 = __toESM(require_react(), 1);
-  var Footer_default = Footer = () => {
-    return /* @__PURE__ */ import_react2.default.createElement("div", null, "This is a footer");
+  var Footer_default = Footer = ({ item, setItem }) => {
+    return /* @__PURE__ */ import_react2.default.createElement("div", null, /* @__PURE__ */ import_react2.default.createElement(
+      "input",
+      {
+        value: item.content,
+        onChange: (event) => {
+          setItem({
+            ...item,
+            content: event.target.value
+          });
+        }
+      }
+    ));
+  };
+
+  // src/models.js
+  var DEFAULT_ITEM = {
+    content: "foo"
   };
 
   // src/App.js
   var App_default = App = () => {
     const [counter, setCounter] = import_react3.default.useState(0);
     const [message, setMessage] = import_react3.default.useState("");
+    const [item, setItem] = import_react3.default.useState(DEFAULT_ITEM);
     return /* @__PURE__ */ import_react3.default.createElement("div", null, /* @__PURE__ */ import_react3.default.createElement(
       Header_default,
       {
@@ -21494,7 +21511,13 @@
         }
       },
       "Click Me!"
-    ), counter, /* @__PURE__ */ import_react3.default.createElement("hr", null), message, /* @__PURE__ */ import_react3.default.createElement(Footer_default, null));
+    ), counter, /* @__PURE__ */ import_react3.default.createElement("hr", null), message, /* @__PURE__ */ import_react3.default.createElement(
+      Footer_default,
+      {
+        item,
+        setItem
+      }
+    ));
   };
 
   // src/index.js
