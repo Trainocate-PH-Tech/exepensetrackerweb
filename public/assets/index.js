@@ -21455,67 +21455,76 @@
   // src/App.js
   var import_react3 = __toESM(require_react(), 1);
 
-  // src/commons/Header.js
-  var import_react = __toESM(require_react(), 1);
-  var Header_default = Header = ({ message }) => {
-    return /* @__PURE__ */ import_react.default.createElement("div", null, message);
+  // src/models.js
+  var DEFAULT_EXPENSE_ITEM = {
+    content: "",
+    amount: 0,
+    category: ""
   };
 
-  // src/commons/Footer.js
-  var import_react2 = __toESM(require_react(), 1);
-  var Footer_default = Footer = ({ item, setItem }) => {
-    return /* @__PURE__ */ import_react2.default.createElement("div", null, /* @__PURE__ */ import_react2.default.createElement(
+  // src/Form.js
+  var import_react = __toESM(require_react(), 1);
+  var Form_default = Form = ({ expenseItem, setExpenseItem }) => {
+    return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement(
       "input",
       {
-        value: item.content,
+        value: expenseItem.content,
         onChange: (event) => {
-          setItem({
-            ...item,
+          setExpenseItem({
+            ...expenseItem,
             content: event.target.value
           });
         }
       }
+    ), /* @__PURE__ */ import_react.default.createElement(
+      "input",
+      {
+        value: expenseItem.amount,
+        type: "number",
+        onChange: (event) => {
+          setExpenseItem({
+            ...expenseItem,
+            amount: event.target.value
+          });
+        }
+      }
+    ), /* @__PURE__ */ import_react.default.createElement(
+      "select",
+      {
+        value: expenseItem.category,
+        onChange: (event) => {
+          setExpenseItem({
+            ...expenseItem,
+            category: event.target.value
+          });
+        }
+      },
+      /* @__PURE__ */ import_react.default.createElement("option", { value: "" }, "--SELECT--"),
+      /* @__PURE__ */ import_react.default.createElement("option", { value: "Food" }, "Food"),
+      /* @__PURE__ */ import_react.default.createElement("option", { value: "Transportation" }, "Transportation"),
+      /* @__PURE__ */ import_react.default.createElement("option", { value: "Others" }, "Others")
     ));
   };
 
-  // src/models.js
-  var DEFAULT_ITEM = {
-    content: "foo"
+  // src/Preview.js
+  var import_react2 = __toESM(require_react(), 1);
+  var Preview_default = Preview = ({ expenseItem }) => {
+    return /* @__PURE__ */ import_react2.default.createElement("div", null, /* @__PURE__ */ import_react2.default.createElement("table", null, /* @__PURE__ */ import_react2.default.createElement("tbody", null, /* @__PURE__ */ import_react2.default.createElement("tr", null, /* @__PURE__ */ import_react2.default.createElement("th", null, "Content"), /* @__PURE__ */ import_react2.default.createElement("td", null, expenseItem.content)), /* @__PURE__ */ import_react2.default.createElement("tr", null, /* @__PURE__ */ import_react2.default.createElement("th", null, "Amount"), /* @__PURE__ */ import_react2.default.createElement("td", null, expenseItem.amount)), /* @__PURE__ */ import_react2.default.createElement("tr", null, /* @__PURE__ */ import_react2.default.createElement("th", null, "Category"), /* @__PURE__ */ import_react2.default.createElement("td", null, expenseItem.category)))));
   };
 
   // src/App.js
   var App_default = App = () => {
-    const [counter, setCounter] = import_react3.default.useState(0);
-    const [message, setMessage] = import_react3.default.useState("");
-    const [item, setItem] = import_react3.default.useState(DEFAULT_ITEM);
+    const [expenseItem, setExpenseItem] = import_react3.default.useState(DEFAULT_EXPENSE_ITEM);
     return /* @__PURE__ */ import_react3.default.createElement("div", null, /* @__PURE__ */ import_react3.default.createElement(
-      Header_default,
+      Form_default,
       {
-        message
+        expenseItem,
+        setExpenseItem
       }
-    ), /* @__PURE__ */ import_react3.default.createElement(
-      "input",
+    ), /* @__PURE__ */ import_react3.default.createElement("hr", null), /* @__PURE__ */ import_react3.default.createElement(
+      Preview_default,
       {
-        value: message,
-        onChange: (event) => {
-          setMessage(event.target.value);
-        }
-      }
-    ), /* @__PURE__ */ import_react3.default.createElement(
-      "button",
-      {
-        onClick: () => {
-          let _counter = counter;
-          _counter++;
-          setCounter(_counter);
-        }
-      },
-      "Click Me!"
-    ), counter, /* @__PURE__ */ import_react3.default.createElement("hr", null), message, /* @__PURE__ */ import_react3.default.createElement(
-      Footer_default,
-      {
-        item,
-        setItem
+        expenseItem
       }
     ));
   };

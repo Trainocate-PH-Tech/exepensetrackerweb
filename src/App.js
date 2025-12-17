@@ -1,40 +1,20 @@
 import React from "react";
-import Header from "./commons/Header";
-import Footer from "./commons/Footer";
-import { DEFAULT_ITEM } from "./models";
+import { DEFAULT_EXPENSE_ITEM } from "./models";
+import Form from "./Form";
+import Preview from "./Preview";
 
 export default App = () => {
-    // State counter
-    const [counter, setCounter] = React.useState(0);
-    const [message, setMessage] = React.useState("");
-    const [item, setItem] = React.useState(DEFAULT_ITEM);
+    const [expenseItem, setExpenseItem] = React.useState(DEFAULT_EXPENSE_ITEM);
 
     return (
         <div>
-            <Header
-               message={message}
+            <Form
+                expenseItem={expenseItem}
+                setExpenseItem={setExpenseItem}
             />
-            <input
-                value={message}
-                onChange={(event) => {
-                    setMessage(event.target.value);
-                }}
-            />
-            <button
-                onClick={() => {
-                    let _counter = counter;
-                    _counter++;
-                    setCounter(_counter);
-                }}
-            >
-                Click Me!
-            </button>
-            {counter}
             <hr/>
-            {message}
-            <Footer
-                item={item}
-                setItem={setItem}
+            <Preview
+                expenseItem={expenseItem}
             />
         </div>
     )
