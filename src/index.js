@@ -1,11 +1,12 @@
-// Declaring a function with a name
-const sayHello = (message) => {
-    console.log(message);
-}
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import React from "react";
 
-sayHello("Hello world!");
+const container = document.getElementById("root");
 
-// Calling an anonymous function (no name)
-(() => {
-    alert("Inside the function!");
-})();
+// Create a Root Container for ReactJS
+const root = ReactDOM.createRoot(container);
+
+root.render(
+    <App></App>
+);
