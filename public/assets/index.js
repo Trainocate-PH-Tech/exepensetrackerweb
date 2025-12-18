@@ -21466,58 +21466,14 @@
     category: ""
   };
 
-  // src/Form.js
-  var import_react = __toESM(require_react(), 1);
-  var Form_default = Form = ({ expenseItem, setExpenseItem }) => {
-    return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement(
-      "input",
-      {
-        value: expenseItem.content,
-        onChange: (event) => {
-          setExpenseItem({
-            ...expenseItem,
-            content: event.target.value
-          });
-        }
-      }
-    ), /* @__PURE__ */ import_react.default.createElement(
-      "input",
-      {
-        value: expenseItem.amount,
-        type: "number",
-        onChange: (event) => {
-          setExpenseItem({
-            ...expenseItem,
-            amount: event.target.value
-          });
-        }
-      }
-    ), /* @__PURE__ */ import_react.default.createElement(
-      "select",
-      {
-        value: expenseItem.category,
-        onChange: (event) => {
-          setExpenseItem({
-            ...expenseItem,
-            category: event.target.value
-          });
-        }
-      },
-      /* @__PURE__ */ import_react.default.createElement("option", { value: "" }, "--SELECT--"),
-      /* @__PURE__ */ import_react.default.createElement("option", { value: "Food" }, "Food"),
-      /* @__PURE__ */ import_react.default.createElement("option", { value: "Transportation" }, "Transportation"),
-      /* @__PURE__ */ import_react.default.createElement("option", { value: "Others" }, "Others")
-    ));
-  };
-
   // src/Preview.js
-  var import_react2 = __toESM(require_react(), 1);
+  var import_react = __toESM(require_react(), 1);
   var Preview_default = Preview = ({ expenseItem }) => {
-    return /* @__PURE__ */ import_react2.default.createElement("div", null, /* @__PURE__ */ import_react2.default.createElement("table", null, /* @__PURE__ */ import_react2.default.createElement("tbody", null, /* @__PURE__ */ import_react2.default.createElement("tr", null, /* @__PURE__ */ import_react2.default.createElement("th", null, "Content"), /* @__PURE__ */ import_react2.default.createElement("td", null, expenseItem.content)), /* @__PURE__ */ import_react2.default.createElement("tr", null, /* @__PURE__ */ import_react2.default.createElement("th", null, "Amount"), /* @__PURE__ */ import_react2.default.createElement("td", null, expenseItem.amount)), /* @__PURE__ */ import_react2.default.createElement("tr", null, /* @__PURE__ */ import_react2.default.createElement("th", null, "Category"), /* @__PURE__ */ import_react2.default.createElement("td", null, expenseItem.category)))));
+    return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("table", null, /* @__PURE__ */ import_react.default.createElement("tbody", null, /* @__PURE__ */ import_react.default.createElement("tr", null, /* @__PURE__ */ import_react.default.createElement("th", null, "Content"), /* @__PURE__ */ import_react.default.createElement("td", null, expenseItem.content)), /* @__PURE__ */ import_react.default.createElement("tr", null, /* @__PURE__ */ import_react.default.createElement("th", null, "Amount"), /* @__PURE__ */ import_react.default.createElement("td", null, expenseItem.amount)), /* @__PURE__ */ import_react.default.createElement("tr", null, /* @__PURE__ */ import_react.default.createElement("th", null, "Category"), /* @__PURE__ */ import_react.default.createElement("td", null, expenseItem.category)))));
   };
 
   // src/expense_items/Index.js
-  var import_react4 = __toESM(require_react(), 1);
+  var import_react3 = __toESM(require_react(), 1);
 
   // node_modules/axios/lib/helpers/bind.js
   function bind(fn, thisArg) {
@@ -24133,22 +24089,22 @@
   };
 
   // src/expense_items/ExpenseItemCard.js
-  var import_react3 = __toESM(require_react(), 1);
+  var import_react2 = __toESM(require_react(), 1);
   var ExpenseItemCard_default = ExpenseItemCard = ({ expenseItem }) => {
-    return /* @__PURE__ */ import_react3.default.createElement("div", null, /* @__PURE__ */ import_react3.default.createElement("h1", null, "ID: ", expenseItem.id), /* @__PURE__ */ import_react3.default.createElement("h2", null, expenseItem.content, " - ", expenseItem.amount), /* @__PURE__ */ import_react3.default.createElement("h3", null, expenseItem.category));
+    return /* @__PURE__ */ import_react2.default.createElement("div", null, /* @__PURE__ */ import_react2.default.createElement("h1", null, "ID: ", expenseItem.id), /* @__PURE__ */ import_react2.default.createElement("h2", null, expenseItem.content, " - ", expenseItem.amount), /* @__PURE__ */ import_react2.default.createElement("h3", null, expenseItem.category));
   };
 
   // src/expense_items/Index.js
   var Index_default = Index = () => {
-    const [expenseItems, setExpenseItems] = import_react4.default.useState([]);
-    import_react4.default.useEffect(() => {
+    const [expenseItems, setExpenseItems] = import_react3.default.useState([]);
+    import_react3.default.useEffect(() => {
       getExpenseItems().then((payload) => {
         console.log(payload);
         setExpenseItems(payload.data);
       });
     }, []);
-    return /* @__PURE__ */ import_react4.default.createElement("div", null, expenseItems.map((expenseItem) => {
-      return /* @__PURE__ */ import_react4.default.createElement(
+    return /* @__PURE__ */ import_react3.default.createElement("div", null, expenseItems.map((expenseItem) => {
+      return /* @__PURE__ */ import_react3.default.createElement(
         ExpenseItemCard_default,
         {
           key: expenseItem.id,
@@ -24158,10 +24114,54 @@
     }));
   };
 
+  // src/expense_items/Form.js
+  var import_react4 = __toESM(require_react(), 1);
+  var Form_default = Form = ({ expenseItem, setExpenseItem }) => {
+    return /* @__PURE__ */ import_react4.default.createElement("div", null, /* @__PURE__ */ import_react4.default.createElement(
+      "input",
+      {
+        value: expenseItem.content,
+        onChange: (event) => {
+          setExpenseItem({
+            ...expenseItem,
+            content: event.target.value
+          });
+        }
+      }
+    ), /* @__PURE__ */ import_react4.default.createElement(
+      "input",
+      {
+        value: expenseItem.amount,
+        type: "number",
+        onChange: (event) => {
+          setExpenseItem({
+            ...expenseItem,
+            amount: event.target.value
+          });
+        }
+      }
+    ), /* @__PURE__ */ import_react4.default.createElement(
+      "select",
+      {
+        value: expenseItem.category,
+        onChange: (event) => {
+          setExpenseItem({
+            ...expenseItem,
+            category: event.target.value
+          });
+        }
+      },
+      /* @__PURE__ */ import_react4.default.createElement("option", { value: "" }, "--SELECT--"),
+      /* @__PURE__ */ import_react4.default.createElement("option", { value: "Food" }, "Food"),
+      /* @__PURE__ */ import_react4.default.createElement("option", { value: "Transportation" }, "Transportation"),
+      /* @__PURE__ */ import_react4.default.createElement("option", { value: "Others" }, "Others")
+    ));
+  };
+
   // src/App.js
   var App_default = App = () => {
     const [expenseItem, setExpenseItem] = import_react5.default.useState(DEFAULT_EXPENSE_ITEM);
-    return /* @__PURE__ */ import_react5.default.createElement("div", null, /* @__PURE__ */ import_react5.default.createElement(Index_default, null), /* @__PURE__ */ import_react5.default.createElement("hr", null), /* @__PURE__ */ import_react5.default.createElement(
+    return /* @__PURE__ */ import_react5.default.createElement("div", { className: "container" }, /* @__PURE__ */ import_react5.default.createElement(Index_default, null), /* @__PURE__ */ import_react5.default.createElement("hr", null), /* @__PURE__ */ import_react5.default.createElement(
       Form_default,
       {
         expenseItem,
