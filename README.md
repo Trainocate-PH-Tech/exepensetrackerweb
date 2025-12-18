@@ -104,3 +104,32 @@ getItems().then((payload) => {
     console.log(payload)
 })
 ```
+
+## Setting up Routes
+
+In your `index.js`, wrap `App` around a router:
+
+```js
+import {
+    HashRouter as Router
+} from "react-router-dom";
+```
+
+Wrap `App` around router:
+
+```js
+<Router>
+    <App/>
+</Router>
+```
+
+In `App`, wrap dynamic section with `Routes`:
+
+```js
+<Routes>
+    <Route
+        path="/",
+        element={<Component/>}
+    />
+</Routes>
+```
