@@ -7,6 +7,7 @@ export default Index = () => {
     const [expenseItems, setExpenseItems] = React.useState([]);
     const [deleteId, setDeleteId] = React.useState(null);
     const [isDeleteConfirmShow, setIsDeleteConfirmShow] = React.useState(false);
+    const [isLoading, setIsLoading] = React.useState(true);
 
     React.useEffect(() => {
         refreshItems();
@@ -17,6 +18,7 @@ export default Index = () => {
             console.log(payload);
             setExpenseItems(payload.data);
             setIsDeleteConfirmShow(false);
+            setIsLoading(false);
         })
     }
 
@@ -34,6 +36,52 @@ export default Index = () => {
         })
     }
 
+    const renderItems = () => {
+        if (isLoading) {
+            return (
+                <div>
+                    Loading...
+                </div>
+            )
+        } else if (expenseItems.length == 0) {
+            return (
+                <p>
+                    No items found.
+                </p>
+            )
+        } else {
+            return (
+                <div>
+                    {expenseItems.map((expenseItem) => {
+                        return (
+                            <div
+                                key={`item-${expenseItem.id}`}
+                                className="card mb-4"
+                            >
+                                <div className="card-body">
+                                    <ExpenseItemCard
+                                        expenseItem={expenseItem}
+                                    />
+                                </div>
+                                <div className="card-footer">
+                                    <button
+                                        className="btn btn-danger"
+                                        onClick={() => {
+                                            handleDelete(expenseItem);
+                                        }}
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
+                            </div>
+                        )
+                    })}
+                </div>
+                
+            )
+        }
+    }
+
     return (
         <div>
             <ConfirmationModal
@@ -42,30 +90,7 @@ export default Index = () => {
                 message={`Are you sure you want to delete item ${deleteId}?`}
                 handleConfirm={handleDeleteConfirm}
             />
-            {expenseItems.map((expenseItem) => {
-                return (
-                    <div
-                        key={`item-${expenseItem.id}`}
-                        className="card mb-4"
-                    >
-                        <div className="card-body">
-                            <ExpenseItemCard
-                                expenseItem={expenseItem}
-                            />
-                        </div>
-                        <div className="card-footer">
-                            <button
-                                className="btn btn-danger"
-                                onClick={() => {
-                                    handleDelete(expenseItem);
-                                }}
-                            >
-                                Delete
-                            </button>
-                        </div>
-                    </div>
-                )
-            })}
+            {renderItems()}
         </div>
     )
 }

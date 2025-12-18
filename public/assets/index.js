@@ -27327,6 +27327,7 @@
     const [expenseItems, setExpenseItems] = import_react31.default.useState([]);
     const [deleteId, setDeleteId] = import_react31.default.useState(null);
     const [isDeleteConfirmShow, setIsDeleteConfirmShow] = import_react31.default.useState(false);
+    const [isLoading, setIsLoading] = import_react31.default.useState(true);
     import_react31.default.useEffect(() => {
       refreshItems();
     }, []);
@@ -27335,6 +27336,7 @@
         console.log(payload);
         setExpenseItems(payload.data);
         setIsDeleteConfirmShow(false);
+        setIsLoading(false);
       });
     };
     const handleDelete = (expenseItem) => {
@@ -27348,6 +27350,39 @@
         refreshItems();
       });
     };
+    const renderItems = () => {
+      if (isLoading) {
+        return /* @__PURE__ */ import_react31.default.createElement("div", null, "Loading...");
+      } else if (expenseItems.length == 0) {
+        return /* @__PURE__ */ import_react31.default.createElement("p", null, "No items found.");
+      } else {
+        return /* @__PURE__ */ import_react31.default.createElement("div", null, expenseItems.map((expenseItem) => {
+          return /* @__PURE__ */ import_react31.default.createElement(
+            "div",
+            {
+              key: `item-${expenseItem.id}`,
+              className: "card mb-4"
+            },
+            /* @__PURE__ */ import_react31.default.createElement("div", { className: "card-body" }, /* @__PURE__ */ import_react31.default.createElement(
+              ExpenseItemCard_default,
+              {
+                expenseItem
+              }
+            )),
+            /* @__PURE__ */ import_react31.default.createElement("div", { className: "card-footer" }, /* @__PURE__ */ import_react31.default.createElement(
+              "button",
+              {
+                className: "btn btn-danger",
+                onClick: () => {
+                  handleDelete(expenseItem);
+                }
+              },
+              "Delete"
+            ))
+          );
+        }));
+      }
+    };
     return /* @__PURE__ */ import_react31.default.createElement("div", null, /* @__PURE__ */ import_react31.default.createElement(
       ConfirmationModal_default,
       {
@@ -27356,31 +27391,7 @@
         message: `Are you sure you want to delete item ${deleteId}?`,
         handleConfirm: handleDeleteConfirm
       }
-    ), expenseItems.map((expenseItem) => {
-      return /* @__PURE__ */ import_react31.default.createElement(
-        "div",
-        {
-          key: `item-${expenseItem.id}`,
-          className: "card mb-4"
-        },
-        /* @__PURE__ */ import_react31.default.createElement("div", { className: "card-body" }, /* @__PURE__ */ import_react31.default.createElement(
-          ExpenseItemCard_default,
-          {
-            expenseItem
-          }
-        )),
-        /* @__PURE__ */ import_react31.default.createElement("div", { className: "card-footer" }, /* @__PURE__ */ import_react31.default.createElement(
-          "button",
-          {
-            className: "btn btn-danger",
-            onClick: () => {
-              handleDelete(expenseItem);
-            }
-          },
-          "Delete"
-        ))
-      );
-    }));
+    ), renderItems());
   };
 
   // src/expense_items/Form.js
