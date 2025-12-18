@@ -5,3 +5,9 @@ export const getExpenseItems = () => {
         `${API_BASE_URL}/expense_items`
     )
 }
+
+export const deleteExpenseItem = (id) => {
+    return axios.delete(
+        `${API_BASE_URL}/expense_items/${id}`
+    );
+}
