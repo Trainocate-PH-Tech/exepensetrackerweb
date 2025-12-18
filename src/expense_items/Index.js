@@ -68,6 +68,14 @@ export default Index = () => {
                                 </div>
                                 <div className="card-footer">
                                     <button
+                                        className="btn btn-primary mr-4"
+                                        onClick={() => {
+                                            navigate(`/expense_items/${expenseItem.id}`);
+                                        }}
+                                    >
+                                        Show
+                                    </button>
+                                    <button
                                         className="btn btn-danger"
                                         onClick={() => {
                                             handleDelete(expenseItem);
