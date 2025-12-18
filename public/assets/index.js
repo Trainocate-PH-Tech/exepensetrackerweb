@@ -27309,158 +27309,9 @@
     );
   };
 
-  // src/expense_items/Index.js
-  var Index_default = Index = () => {
-    const [expenseItems, setExpenseItems] = import_react30.default.useState([]);
-    const [deleteId, setDeleteId] = import_react30.default.useState(null);
-    const [isDeleteConfirmShow, setIsDeleteConfirmShow] = import_react30.default.useState(false);
-    const [isLoading, setIsLoading] = import_react30.default.useState(true);
-    import_react30.default.useEffect(() => {
-      refreshItems();
-    }, []);
-    const refreshItems = () => {
-      getExpenseItems().then((payload) => {
-        console.log(payload);
-        setExpenseItems(payload.data);
-        setIsDeleteConfirmShow(false);
-        setIsLoading(false);
-      });
-    };
-    const handleDelete = (expenseItem) => {
-      console.log(`Trying to delete item ${expenseItem.id}`);
-      setDeleteId(expenseItem.id);
-      setIsDeleteConfirmShow(true);
-    };
-    const handleDeleteConfirm = () => {
-      console.log(`Confirming deletion of ${deleteId}`);
-      deleteExpenseItem(deleteId).then(() => {
-        refreshItems();
-      });
-    };
-    const renderItems = () => {
-      if (isLoading) {
-        return /* @__PURE__ */ import_react30.default.createElement("div", null, "Loading...");
-      } else if (expenseItems.length == 0) {
-        return /* @__PURE__ */ import_react30.default.createElement("p", null, "No items found.");
-      } else {
-        return /* @__PURE__ */ import_react30.default.createElement("div", null, expenseItems.map((expenseItem) => {
-          return /* @__PURE__ */ import_react30.default.createElement(
-            "div",
-            {
-              key: `item-${expenseItem.id}`,
-              className: "card mb-4"
-            },
-            /* @__PURE__ */ import_react30.default.createElement("div", { className: "card-body" }, /* @__PURE__ */ import_react30.default.createElement(
-              ExpenseItemCard_default,
-              {
-                expenseItem
-              }
-            )),
-            /* @__PURE__ */ import_react30.default.createElement("div", { className: "card-footer" }, /* @__PURE__ */ import_react30.default.createElement(
-              "button",
-              {
-                className: "btn btn-danger",
-                onClick: () => {
-                  handleDelete(expenseItem);
-                }
-              },
-              "Delete"
-            ))
-          );
-        }));
-      }
-    };
-    return /* @__PURE__ */ import_react30.default.createElement("div", null, /* @__PURE__ */ import_react30.default.createElement(
-      ConfirmationModal_default,
-      {
-        show: isDeleteConfirmShow,
-        setShow: setIsDeleteConfirmShow,
-        message: `Are you sure you want to delete item ${deleteId}?`,
-        handleConfirm: handleDeleteConfirm
-      }
-    ), renderItems());
-  };
-
-  // src/expense_items/FormContainer.js
-  var import_react33 = __toESM(require_react(), 1);
-
-  // src/expense_items/Form.js
-  var import_react31 = __toESM(require_react(), 1);
-  var Form_default = Form = ({ expenseItem, setExpenseItem }) => {
-    return /* @__PURE__ */ import_react31.default.createElement("div", null, /* @__PURE__ */ import_react31.default.createElement(
-      "input",
-      {
-        value: expenseItem.content,
-        onChange: (event) => {
-          setExpenseItem({
-            ...expenseItem,
-            content: event.target.value
-          });
-        }
-      }
-    ), /* @__PURE__ */ import_react31.default.createElement(
-      "input",
-      {
-        value: expenseItem.amount,
-        type: "number",
-        onChange: (event) => {
-          setExpenseItem({
-            ...expenseItem,
-            amount: event.target.value
-          });
-        }
-      }
-    ), /* @__PURE__ */ import_react31.default.createElement(
-      "select",
-      {
-        value: expenseItem.category,
-        onChange: (event) => {
-          setExpenseItem({
-            ...expenseItem,
-            category: event.target.value
-          });
-        }
-      },
-      /* @__PURE__ */ import_react31.default.createElement("option", { value: "" }, "--SELECT--"),
-      /* @__PURE__ */ import_react31.default.createElement("option", { value: "Food" }, "Food"),
-      /* @__PURE__ */ import_react31.default.createElement("option", { value: "Transportation" }, "Transportation"),
-      /* @__PURE__ */ import_react31.default.createElement("option", { value: "Others" }, "Others")
-    ));
-  };
-
-  // src/expense_items/Preview.js
-  var import_react32 = __toESM(require_react(), 1);
-  var Preview_default = Preview = ({ expenseItem }) => {
-    return /* @__PURE__ */ import_react32.default.createElement("div", null, /* @__PURE__ */ import_react32.default.createElement("table", null, /* @__PURE__ */ import_react32.default.createElement("tbody", null, /* @__PURE__ */ import_react32.default.createElement("tr", null, /* @__PURE__ */ import_react32.default.createElement("th", null, "Content"), /* @__PURE__ */ import_react32.default.createElement("td", null, expenseItem.content)), /* @__PURE__ */ import_react32.default.createElement("tr", null, /* @__PURE__ */ import_react32.default.createElement("th", null, "Amount"), /* @__PURE__ */ import_react32.default.createElement("td", null, expenseItem.amount)), /* @__PURE__ */ import_react32.default.createElement("tr", null, /* @__PURE__ */ import_react32.default.createElement("th", null, "Category"), /* @__PURE__ */ import_react32.default.createElement("td", null, expenseItem.category)))));
-  };
-
-  // src/models.js
-  var DEFAULT_EXPENSE_ITEM = {
-    content: "",
-    amount: 0,
-    category: ""
-  };
-
-  // src/expense_items/FormContainer.js
-  var FormContainer_default = FormContainer = () => {
-    const [expenseItem, setExpenseItem] = import_react33.default.useState(DEFAULT_EXPENSE_ITEM);
-    return /* @__PURE__ */ import_react33.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react33.default.createElement("div", { className: "col" }, /* @__PURE__ */ import_react33.default.createElement(
-      Form_default,
-      {
-        expenseItem,
-        setExpenseItem
-      }
-    )), /* @__PURE__ */ import_react33.default.createElement("div", { className: "col" }, /* @__PURE__ */ import_react33.default.createElement(
-      Preview_default,
-      {
-        expenseItem
-      }
-    )));
-  };
-
   // node_modules/react-router/dist/development/chunk-JMJ3UQ3L.mjs
-  var React26 = __toESM(require_react(), 1);
-  var React27 = __toESM(require_react(), 1);
+  var React22 = __toESM(require_react(), 1);
+  var React23 = __toESM(require_react(), 1);
   var React32 = __toESM(require_react(), 1);
   var React42 = __toESM(require_react(), 1);
   var React92 = __toESM(require_react(), 1);
@@ -28157,36 +28008,36 @@
     ...validMutationMethodsArr
   ];
   var validRequestMethods = new Set(validRequestMethodsArr);
-  var DataRouterContext = React26.createContext(null);
+  var DataRouterContext = React22.createContext(null);
   DataRouterContext.displayName = "DataRouter";
-  var DataRouterStateContext = React26.createContext(null);
+  var DataRouterStateContext = React22.createContext(null);
   DataRouterStateContext.displayName = "DataRouterState";
-  var RSCRouterContext = React26.createContext(false);
-  var ViewTransitionContext = React26.createContext({
+  var RSCRouterContext = React22.createContext(false);
+  var ViewTransitionContext = React22.createContext({
     isTransitioning: false
   });
   ViewTransitionContext.displayName = "ViewTransition";
-  var FetchersContext = React26.createContext(
+  var FetchersContext = React22.createContext(
     /* @__PURE__ */ new Map()
   );
   FetchersContext.displayName = "Fetchers";
-  var AwaitContext = React26.createContext(null);
+  var AwaitContext = React22.createContext(null);
   AwaitContext.displayName = "Await";
-  var NavigationContext = React26.createContext(
+  var NavigationContext = React22.createContext(
     null
   );
   NavigationContext.displayName = "Navigation";
-  var LocationContext = React26.createContext(
+  var LocationContext = React22.createContext(
     null
   );
   LocationContext.displayName = "Location";
-  var RouteContext = React26.createContext({
+  var RouteContext = React22.createContext({
     outlet: null,
     matches: [],
     isDataRoute: false
   });
   RouteContext.displayName = "Route";
-  var RouteErrorContext = React26.createContext(null);
+  var RouteErrorContext = React22.createContext(null);
   RouteErrorContext.displayName = "RouteError";
   var ENABLE_DEV_WARNINGS = true;
   var ERROR_DIGEST_BASE = "REACT_ROUTER_ERROR";
@@ -28227,7 +28078,7 @@
       // router loaded. We can help them understand how to avoid that.
       `useHref() may be used only in the context of a <Router> component.`
     );
-    let { basename, navigator: navigator2 } = React27.useContext(NavigationContext);
+    let { basename, navigator: navigator2 } = React23.useContext(NavigationContext);
     let { hash, pathname, search } = useResolvedPath(to, { relative });
     let joinedPathname = pathname;
     if (basename !== "/") {
@@ -28236,7 +28087,7 @@
     return navigator2.createHref({ pathname: joinedPathname, search, hash });
   }
   function useInRouterContext() {
-    return React27.useContext(LocationContext) != null;
+    return React23.useContext(LocationContext) != null;
   }
   function useLocation() {
     invariant(
@@ -28245,17 +28096,17 @@
       // router loaded. We can help them understand how to avoid that.
       `useLocation() may be used only in the context of a <Router> component.`
     );
-    return React27.useContext(LocationContext).location;
+    return React23.useContext(LocationContext).location;
   }
   var navigateEffectWarning = `You should call navigate() in a React.useEffect(), not when your component is first rendered.`;
   function useIsomorphicLayoutEffect(cb) {
-    let isStatic = React27.useContext(NavigationContext).static;
+    let isStatic = React23.useContext(NavigationContext).static;
     if (!isStatic) {
-      React27.useLayoutEffect(cb);
+      React23.useLayoutEffect(cb);
     }
   }
   function useNavigate() {
-    let { isDataRoute } = React27.useContext(RouteContext);
+    let { isDataRoute } = React23.useContext(RouteContext);
     return isDataRoute ? useNavigateStable() : useNavigateUnstable();
   }
   function useNavigateUnstable() {
@@ -28265,16 +28116,16 @@
       // router loaded. We can help them understand how to avoid that.
       `useNavigate() may be used only in the context of a <Router> component.`
     );
-    let dataRouterContext = React27.useContext(DataRouterContext);
-    let { basename, navigator: navigator2 } = React27.useContext(NavigationContext);
-    let { matches } = React27.useContext(RouteContext);
+    let dataRouterContext = React23.useContext(DataRouterContext);
+    let { basename, navigator: navigator2 } = React23.useContext(NavigationContext);
+    let { matches } = React23.useContext(RouteContext);
     let { pathname: locationPathname } = useLocation();
     let routePathnamesJson = JSON.stringify(getResolveToMatches(matches));
-    let activeRef = React27.useRef(false);
+    let activeRef = React23.useRef(false);
     useIsomorphicLayoutEffect(() => {
       activeRef.current = true;
     });
-    let navigate = React27.useCallback(
+    let navigate = React23.useCallback(
       (to, options = {}) => {
         warning(activeRef.current, navigateEffectWarning);
         if (!activeRef.current) return;
@@ -28307,12 +28158,12 @@
     );
     return navigate;
   }
-  var OutletContext = React27.createContext(null);
+  var OutletContext = React23.createContext(null);
   function useResolvedPath(to, { relative } = {}) {
-    let { matches } = React27.useContext(RouteContext);
+    let { matches } = React23.useContext(RouteContext);
     let { pathname: locationPathname } = useLocation();
     let routePathnamesJson = JSON.stringify(getResolveToMatches(matches));
-    return React27.useMemo(
+    return React23.useMemo(
       () => resolveTo(
         to,
         JSON.parse(routePathnamesJson),
@@ -28332,8 +28183,8 @@
       // router loaded. We can help them understand how to avoid that.
       `useRoutes() may be used only in the context of a <Router> component.`
     );
-    let { navigator: navigator2 } = React27.useContext(NavigationContext);
-    let { matches: parentMatches } = React27.useContext(RouteContext);
+    let { navigator: navigator2 } = React23.useContext(NavigationContext);
+    let { matches: parentMatches } = React23.useContext(RouteContext);
     let routeMatch = parentMatches[parentMatches.length - 1];
     let parentParams = routeMatch ? routeMatch.params : {};
     let parentPathname = routeMatch ? routeMatch.pathname : "/";
@@ -28411,7 +28262,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       future
     );
     if (locationArg && renderedMatches) {
-      return /* @__PURE__ */ React27.createElement(
+      return /* @__PURE__ */ React23.createElement(
         LocationContext.Provider,
         {
           value: {
@@ -28445,12 +28296,12 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         "Error handled by React Router default ErrorBoundary:",
         error
       );
-      devInfo = /* @__PURE__ */ React27.createElement(React27.Fragment, null, /* @__PURE__ */ React27.createElement("p", null, "\u{1F4BF} Hey developer \u{1F44B}"), /* @__PURE__ */ React27.createElement("p", null, "You can provide a way better UX than this when your app throws errors by providing your own ", /* @__PURE__ */ React27.createElement("code", { style: codeStyles }, "ErrorBoundary"), " or", " ", /* @__PURE__ */ React27.createElement("code", { style: codeStyles }, "errorElement"), " prop on your route."));
+      devInfo = /* @__PURE__ */ React23.createElement(React23.Fragment, null, /* @__PURE__ */ React23.createElement("p", null, "\u{1F4BF} Hey developer \u{1F44B}"), /* @__PURE__ */ React23.createElement("p", null, "You can provide a way better UX than this when your app throws errors by providing your own ", /* @__PURE__ */ React23.createElement("code", { style: codeStyles }, "ErrorBoundary"), " or", " ", /* @__PURE__ */ React23.createElement("code", { style: codeStyles }, "errorElement"), " prop on your route."));
     }
-    return /* @__PURE__ */ React27.createElement(React27.Fragment, null, /* @__PURE__ */ React27.createElement("h2", null, "Unexpected Application Error!"), /* @__PURE__ */ React27.createElement("h3", { style: { fontStyle: "italic" } }, message), stack ? /* @__PURE__ */ React27.createElement("pre", { style: preStyles }, stack) : null, devInfo);
+    return /* @__PURE__ */ React23.createElement(React23.Fragment, null, /* @__PURE__ */ React23.createElement("h2", null, "Unexpected Application Error!"), /* @__PURE__ */ React23.createElement("h3", { style: { fontStyle: "italic" } }, message), stack ? /* @__PURE__ */ React23.createElement("pre", { style: preStyles }, stack) : null, devInfo);
   }
-  var defaultErrorElement = /* @__PURE__ */ React27.createElement(DefaultErrorComponent, null);
-  var RenderErrorBoundary = class extends React27.Component {
+  var defaultErrorElement = /* @__PURE__ */ React23.createElement(DefaultErrorComponent, null);
+  var RenderErrorBoundary = class extends React23.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -28492,7 +28343,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         const decoded = decodeRouteErrorResponseDigest(error.digest);
         if (decoded) error = decoded;
       }
-      let result = error !== void 0 ? /* @__PURE__ */ React27.createElement(RouteContext.Provider, { value: this.props.routeContext }, /* @__PURE__ */ React27.createElement(
+      let result = error !== void 0 ? /* @__PURE__ */ React23.createElement(RouteContext.Provider, { value: this.props.routeContext }, /* @__PURE__ */ React23.createElement(
         RouteErrorContext.Provider,
         {
           value: error,
@@ -28500,7 +28351,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
         }
       )) : this.props.children;
       if (this.context) {
-        return /* @__PURE__ */ React27.createElement(RSCErrorHandler, { error }, result);
+        return /* @__PURE__ */ React23.createElement(RSCErrorHandler, { error }, result);
       }
       return result;
     }
@@ -28511,7 +28362,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     children,
     error
   }) {
-    let { basename } = React27.useContext(NavigationContext);
+    let { basename } = React23.useContext(NavigationContext);
     if (typeof error === "object" && error && "digest" in error && typeof error.digest === "string") {
       let redirect2 = decodeRedirectErrorDigest(error.digest);
       if (redirect2) {
@@ -28531,7 +28382,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
             throw redirectPromise;
           }
         }
-        return /* @__PURE__ */ React27.createElement(
+        return /* @__PURE__ */ React23.createElement(
           "meta",
           {
             httpEquiv: "refresh",
@@ -28543,11 +28394,11 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     return children;
   }
   function RenderedRoute({ routeContext, match, children }) {
-    let dataRouterContext = React27.useContext(DataRouterContext);
+    let dataRouterContext = React23.useContext(DataRouterContext);
     if (dataRouterContext && dataRouterContext.static && dataRouterContext.staticContext && (match.route.errorElement || match.route.ErrorBoundary)) {
       dataRouterContext.staticContext._deepestRenderedBoundaryId = match.route.id;
     }
-    return /* @__PURE__ */ React27.createElement(RouteContext.Provider, { value: routeContext }, children);
+    return /* @__PURE__ */ React23.createElement(RouteContext.Provider, { value: routeContext }, children);
   }
   function _renderMatches(matches, parentMatches = [], dataRouterState = null, onErrorHandler = null, future = null) {
     if (matches == null) {
@@ -28642,13 +28493,13 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
           } else if (shouldRenderHydrateFallback) {
             children = hydrateFallbackElement;
           } else if (match.route.Component) {
-            children = /* @__PURE__ */ React27.createElement(match.route.Component, null);
+            children = /* @__PURE__ */ React23.createElement(match.route.Component, null);
           } else if (match.route.element) {
             children = match.route.element;
           } else {
             children = outlet;
           }
-          return /* @__PURE__ */ React27.createElement(
+          return /* @__PURE__ */ React23.createElement(
             RenderedRoute,
             {
               match,
@@ -28661,7 +28512,7 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
             }
           );
         };
-        return dataRouterState && (match.route.ErrorBoundary || match.route.errorElement || index === 0) ? /* @__PURE__ */ React27.createElement(
+        return dataRouterState && (match.route.ErrorBoundary || match.route.errorElement || index === 0) ? /* @__PURE__ */ React23.createElement(
           RenderErrorBoundary,
           {
             location: dataRouterState.location,
@@ -28681,17 +28532,17 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     return `${hookName} must be used within a data router.  See https://reactrouter.com/en/main/routers/picking-a-router.`;
   }
   function useDataRouterContext(hookName) {
-    let ctx = React27.useContext(DataRouterContext);
+    let ctx = React23.useContext(DataRouterContext);
     invariant(ctx, getDataRouterConsoleError(hookName));
     return ctx;
   }
   function useDataRouterState(hookName) {
-    let state = React27.useContext(DataRouterStateContext);
+    let state = React23.useContext(DataRouterStateContext);
     invariant(state, getDataRouterConsoleError(hookName));
     return state;
   }
   function useRouteContext(hookName) {
-    let route = React27.useContext(RouteContext);
+    let route = React23.useContext(RouteContext);
     invariant(route, getDataRouterConsoleError(hookName));
     return route;
   }
@@ -28722,13 +28573,13 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       "useMatches"
       /* UseMatches */
     );
-    return React27.useMemo(
+    return React23.useMemo(
       () => matches.map((m) => convertRouteMatchToUiMatch(m, loaderData)),
       [matches, loaderData]
     );
   }
   function useRouteError() {
-    let error = React27.useContext(RouteErrorContext);
+    let error = React23.useContext(RouteErrorContext);
     let state = useDataRouterState(
       "useRouteError"
       /* UseRouteError */
@@ -28751,11 +28602,11 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       "useNavigate"
       /* UseNavigateStable */
     );
-    let activeRef = React27.useRef(false);
+    let activeRef = React23.useRef(false);
     useIsomorphicLayoutEffect(() => {
       activeRef.current = true;
     });
-    let navigate = React27.useCallback(
+    let navigate = React23.useCallback(
       async (to, options = {}) => {
         warning(activeRef.current, navigateEffectWarning);
         if (!activeRef.current) return;
@@ -30005,6 +29856,165 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     let nextPath = stripBasename(vtContext.nextLocation.pathname, basename) || vtContext.nextLocation.pathname;
     return matchPath(path.pathname, nextPath) != null || matchPath(path.pathname, currentPath) != null;
   }
+
+  // src/expense_items/Index.js
+  var Index_default = Index = () => {
+    const [expenseItems, setExpenseItems] = import_react30.default.useState([]);
+    const [deleteId, setDeleteId] = import_react30.default.useState(null);
+    const [isDeleteConfirmShow, setIsDeleteConfirmShow] = import_react30.default.useState(false);
+    const [isLoading, setIsLoading] = import_react30.default.useState(true);
+    const navigate = useNavigate();
+    import_react30.default.useEffect(() => {
+      refreshItems();
+    }, []);
+    const refreshItems = () => {
+      getExpenseItems().then((payload) => {
+        console.log(payload);
+        setExpenseItems(payload.data);
+        setIsDeleteConfirmShow(false);
+        setIsLoading(false);
+      });
+    };
+    const handleDelete = (expenseItem) => {
+      console.log(`Trying to delete item ${expenseItem.id}`);
+      setDeleteId(expenseItem.id);
+      setIsDeleteConfirmShow(true);
+    };
+    const handleDeleteConfirm = () => {
+      console.log(`Confirming deletion of ${deleteId}`);
+      deleteExpenseItem(deleteId).then(() => {
+        refreshItems();
+      });
+    };
+    const renderItems = () => {
+      if (isLoading) {
+        return /* @__PURE__ */ import_react30.default.createElement("div", null, "Loading...");
+      } else if (expenseItems.length == 0) {
+        return /* @__PURE__ */ import_react30.default.createElement("p", null, "No items found.");
+      } else {
+        return /* @__PURE__ */ import_react30.default.createElement("div", null, expenseItems.map((expenseItem) => {
+          return /* @__PURE__ */ import_react30.default.createElement(
+            "div",
+            {
+              key: `item-${expenseItem.id}`,
+              className: "card mb-4"
+            },
+            /* @__PURE__ */ import_react30.default.createElement("div", { className: "card-body" }, /* @__PURE__ */ import_react30.default.createElement(
+              ExpenseItemCard_default,
+              {
+                expenseItem
+              }
+            )),
+            /* @__PURE__ */ import_react30.default.createElement("div", { className: "card-footer" }, /* @__PURE__ */ import_react30.default.createElement(
+              "button",
+              {
+                className: "btn btn-danger",
+                onClick: () => {
+                  handleDelete(expenseItem);
+                }
+              },
+              "Delete"
+            ))
+          );
+        }));
+      }
+    };
+    return /* @__PURE__ */ import_react30.default.createElement("div", null, /* @__PURE__ */ import_react30.default.createElement(
+      ConfirmationModal_default,
+      {
+        show: isDeleteConfirmShow,
+        setShow: setIsDeleteConfirmShow,
+        message: `Are you sure you want to delete item ${deleteId}?`,
+        handleConfirm: handleDeleteConfirm
+      }
+    ), /* @__PURE__ */ import_react30.default.createElement(
+      "button",
+      {
+        className: "btn btn-success",
+        onClick: () => {
+          navigate("/expense_items/new");
+        }
+      },
+      "New Expense Item"
+    ), renderItems());
+  };
+
+  // src/expense_items/FormContainer.js
+  var import_react33 = __toESM(require_react(), 1);
+
+  // src/expense_items/Form.js
+  var import_react31 = __toESM(require_react(), 1);
+  var Form_default = Form = ({ expenseItem, setExpenseItem }) => {
+    return /* @__PURE__ */ import_react31.default.createElement("div", null, /* @__PURE__ */ import_react31.default.createElement(
+      "input",
+      {
+        value: expenseItem.content,
+        onChange: (event) => {
+          setExpenseItem({
+            ...expenseItem,
+            content: event.target.value
+          });
+        }
+      }
+    ), /* @__PURE__ */ import_react31.default.createElement(
+      "input",
+      {
+        value: expenseItem.amount,
+        type: "number",
+        onChange: (event) => {
+          setExpenseItem({
+            ...expenseItem,
+            amount: event.target.value
+          });
+        }
+      }
+    ), /* @__PURE__ */ import_react31.default.createElement(
+      "select",
+      {
+        value: expenseItem.category,
+        onChange: (event) => {
+          setExpenseItem({
+            ...expenseItem,
+            category: event.target.value
+          });
+        }
+      },
+      /* @__PURE__ */ import_react31.default.createElement("option", { value: "" }, "--SELECT--"),
+      /* @__PURE__ */ import_react31.default.createElement("option", { value: "Food" }, "Food"),
+      /* @__PURE__ */ import_react31.default.createElement("option", { value: "Transportation" }, "Transportation"),
+      /* @__PURE__ */ import_react31.default.createElement("option", { value: "Others" }, "Others")
+    ));
+  };
+
+  // src/expense_items/Preview.js
+  var import_react32 = __toESM(require_react(), 1);
+  var Preview_default = Preview = ({ expenseItem }) => {
+    return /* @__PURE__ */ import_react32.default.createElement("div", null, /* @__PURE__ */ import_react32.default.createElement("table", null, /* @__PURE__ */ import_react32.default.createElement("tbody", null, /* @__PURE__ */ import_react32.default.createElement("tr", null, /* @__PURE__ */ import_react32.default.createElement("th", null, "Content"), /* @__PURE__ */ import_react32.default.createElement("td", null, expenseItem.content)), /* @__PURE__ */ import_react32.default.createElement("tr", null, /* @__PURE__ */ import_react32.default.createElement("th", null, "Amount"), /* @__PURE__ */ import_react32.default.createElement("td", null, expenseItem.amount)), /* @__PURE__ */ import_react32.default.createElement("tr", null, /* @__PURE__ */ import_react32.default.createElement("th", null, "Category"), /* @__PURE__ */ import_react32.default.createElement("td", null, expenseItem.category)))));
+  };
+
+  // src/models.js
+  var DEFAULT_EXPENSE_ITEM = {
+    content: "",
+    amount: 0,
+    category: ""
+  };
+
+  // src/expense_items/FormContainer.js
+  var FormContainer_default = FormContainer = () => {
+    const [expenseItem, setExpenseItem] = import_react33.default.useState(DEFAULT_EXPENSE_ITEM);
+    return /* @__PURE__ */ import_react33.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react33.default.createElement("div", { className: "col" }, /* @__PURE__ */ import_react33.default.createElement(
+      Form_default,
+      {
+        expenseItem,
+        setExpenseItem
+      }
+    )), /* @__PURE__ */ import_react33.default.createElement("div", { className: "col" }, /* @__PURE__ */ import_react33.default.createElement(
+      Preview_default,
+      {
+        expenseItem
+      }
+    )));
+  };
 
   // src/App.js
   var App_default = App = () => {

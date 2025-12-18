@@ -133,3 +133,21 @@ In `App`, wrap dynamic section with `Routes`:
     />
 </Routes>
 ```
+
+To navigate to a path:
+
+```js
+import { useNavigate } from "react-router-dom";
+```
+
+In the component:
+
+```js
+const navigate = useNavigate();
+```
+
+To actually navigate to a different path:
+
+```js
+navigate("/path/to/content");
+```

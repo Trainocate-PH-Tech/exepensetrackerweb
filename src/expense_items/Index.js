@@ -2,12 +2,15 @@ import React from "react";
 import { getExpenseItems, deleteExpenseItem } from "../services/ExpenseItemsService";
 import ExpenseItemCard from "./ExpenseItemCard";
 import ConfirmationModal from "../commons/ConfirmationModal";
+import { useNavigate } from "react-router-dom";
 
 export default Index = () => {
     const [expenseItems, setExpenseItems] = React.useState([]);
     const [deleteId, setDeleteId] = React.useState(null);
     const [isDeleteConfirmShow, setIsDeleteConfirmShow] = React.useState(false);
     const [isLoading, setIsLoading] = React.useState(true);
+
+    const navigate = useNavigate();
 
     React.useEffect(() => {
         refreshItems();
@@ -90,6 +93,14 @@ export default Index = () => {
                 message={`Are you sure you want to delete item ${deleteId}?`}
                 handleConfirm={handleDeleteConfirm}
             />
+            <button
+                className="btn btn-success"
+                onClick={() => {
+                    navigate("/expense_items/new");
+                }}
+            >
+                New Expense Item
+            </button>
             {renderItems()}
         </div>
     )
