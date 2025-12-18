@@ -1,5 +1,10 @@
 {
   "expense_items": [
-    {"id": "abc", "amount": 500, "content": "Ramen", "category": "Food"}
+    {
+      "id": "519a",
+      "content": "Grab",
+      "amount": "250",
+      "category": "Transportation"
+    }
   ]
 }

@@ -76,6 +76,14 @@ export default Index = () => {
                                         Show
                                     </button>
                                     <button
+                                        className="btn btn-secondary mr-4"
+                                        onClick={() => {
+                                            navigate(`/expense_items/${expenseItem.id}/edit`)
+                                        }}
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
                                         className="btn btn-danger"
                                         onClick={() => {
                                             handleDelete(expenseItem);

@@ -16,12 +16,20 @@ export default App = () => {
                     element={<ExpenseItemsIndex/>}
                 />
                 <Route
+                    path="/expense_items"
+                    element={<ExpenseItemsIndex/>}
+                />
+                <Route
                     path="/expense_items/new"
                     element={<ExpenseItemsFormContainer/>}
                 />
                 <Route
                     path="/expense_items/:id"
                     element={<ExpenseItemsShow/>}
+                />
+                <Route
+                    path="/expense_items/:id/edit"
+                    element={<ExpenseItemsFormContainer/>}
                 />
             </Routes>
         </div>

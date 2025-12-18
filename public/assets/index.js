@@ -25185,6 +25185,24 @@
       `${"http://localhost:3000"}/expense_items/${id}`
     );
   };
+  var getExpenseItem = (id) => {
+    return axios_default.get(
+      `${"http://localhost:3000"}/expense_items/${id}`
+    );
+  };
+  var saveExpenseItem = (expenseItem) => {
+    if (expenseItem.id) {
+      return axios_default.put(
+        `${"http://localhost:3000"}/expense_items/${expenseItem.id}`,
+        expenseItem
+      );
+    } else {
+      return axios_default.post(
+        `${"http://localhost:3000"}/expense_items`,
+        expenseItem
+      );
+    }
+  };
 
   // src/expense_items/ExpenseItemCard.js
   var import_react = __toESM(require_react(), 1);
@@ -29922,6 +29940,15 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
             ), /* @__PURE__ */ import_react30.default.createElement(
               "button",
               {
+                className: "btn btn-secondary mr-4",
+                onClick: () => {
+                  navigate(`/expense_items/${expenseItem.id}/edit`);
+                }
+              },
+              "Edit"
+            ), /* @__PURE__ */ import_react30.default.createElement(
+              "button",
+              {
                 className: "btn btn-danger",
                 onClick: () => {
                   handleDelete(expenseItem);
@@ -29959,10 +29986,14 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   // src/expense_items/Form.js
   var import_react31 = __toESM(require_react(), 1);
   var Form_default = Form = ({ expenseItem, setExpenseItem }) => {
-    return /* @__PURE__ */ import_react31.default.createElement("div", null, /* @__PURE__ */ import_react31.default.createElement(
+    const [isLoading, setIsLoading] = import_react31.default.useState(false);
+    const navigate = useNavigate();
+    return /* @__PURE__ */ import_react31.default.createElement("div", null, /* @__PURE__ */ import_react31.default.createElement("div", { className: "form-group" }, /* @__PURE__ */ import_react31.default.createElement("label", null, "Content"), /* @__PURE__ */ import_react31.default.createElement(
       "input",
       {
         value: expenseItem.content,
+        disabled: isLoading,
+        className: "form-control",
         onChange: (event) => {
           setExpenseItem({
             ...expenseItem,
@@ -29970,11 +30001,13 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
           });
         }
       }
-    ), /* @__PURE__ */ import_react31.default.createElement(
+    )), /* @__PURE__ */ import_react31.default.createElement("div", { className: "form-group mt-4" }, /* @__PURE__ */ import_react31.default.createElement("label", null, "Amount"), /* @__PURE__ */ import_react31.default.createElement(
       "input",
       {
         value: expenseItem.amount,
+        disabled: isLoading,
         type: "number",
+        className: "form-control",
         onChange: (event) => {
           setExpenseItem({
             ...expenseItem,
@@ -29982,10 +30015,12 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
           });
         }
       }
-    ), /* @__PURE__ */ import_react31.default.createElement(
+    )), /* @__PURE__ */ import_react31.default.createElement("div", { className: "form-group mt-4" }, /* @__PURE__ */ import_react31.default.createElement("label", null, "Category"), /* @__PURE__ */ import_react31.default.createElement(
       "select",
       {
         value: expenseItem.category,
+        disabled: isLoading,
+        className: "form-control",
         onChange: (event) => {
           setExpenseItem({
             ...expenseItem,
@@ -29997,6 +30032,20 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       /* @__PURE__ */ import_react31.default.createElement("option", { value: "Food" }, "Food"),
       /* @__PURE__ */ import_react31.default.createElement("option", { value: "Transportation" }, "Transportation"),
       /* @__PURE__ */ import_react31.default.createElement("option", { value: "Others" }, "Others")
+    )), /* @__PURE__ */ import_react31.default.createElement("hr", null), /* @__PURE__ */ import_react31.default.createElement(
+      "button",
+      {
+        className: "btn btn-success",
+        disabled: isLoading,
+        onClick: () => {
+          setIsLoading(true);
+          saveExpenseItem(expenseItem).then((payload) => {
+            setIsLoading(false);
+            navigate(`/expense_items/${payload.data.id}`);
+          });
+        }
+      },
+      "Save"
     ));
   };
 
@@ -30016,6 +30065,16 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   // src/expense_items/FormContainer.js
   var FormContainer_default = FormContainer = () => {
     const [expenseItem, setExpenseItem] = import_react33.default.useState(DEFAULT_EXPENSE_ITEM);
+    let {
+      id
+    } = useParams();
+    import_react33.default.useEffect(() => {
+      if (id) {
+        getExpenseItem(id).then((payload) => {
+          setExpenseItem(payload.data);
+        });
+      }
+    }, []);
     return /* @__PURE__ */ import_react33.default.createElement("div", { className: "row" }, /* @__PURE__ */ import_react33.default.createElement("div", { className: "col" }, /* @__PURE__ */ import_react33.default.createElement(
       Form_default,
       {
@@ -30033,10 +30092,26 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
   // src/expense_items/Show.js
   var import_react34 = __toESM(require_react(), 1);
   var Show_default = Show = () => {
+    const [expenseItem, setExpenseItem] = import_react34.default.useState(DEFAULT_EXPENSE_ITEM);
+    const navigate = useNavigate();
     let {
       id
     } = useParams();
-    return /* @__PURE__ */ import_react34.default.createElement("div", null, "Expense Item Show Page ", id);
+    import_react34.default.useEffect(() => {
+      getExpenseItem(id).then((payload) => {
+        setExpenseItem(payload.data);
+      });
+    }, [id]);
+    return /* @__PURE__ */ import_react34.default.createElement("div", null, "Expense Item: ", expenseItem.content, /* @__PURE__ */ import_react34.default.createElement("hr", null), "Amount: ", expenseItem.amount, /* @__PURE__ */ import_react34.default.createElement("hr", null), "Category: ", expenseItem.category, /* @__PURE__ */ import_react34.default.createElement("hr", null), /* @__PURE__ */ import_react34.default.createElement(
+      "button",
+      {
+        className: "btn btn-secondary",
+        onClick: () => {
+          navigate(`/expense_items`);
+        }
+      },
+      "Go Back"
+    ));
   };
 
   // src/App.js
@@ -30050,6 +30125,12 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
     ), /* @__PURE__ */ import_react35.default.createElement(
       Route,
       {
+        path: "/expense_items",
+        element: /* @__PURE__ */ import_react35.default.createElement(Index_default, null)
+      }
+    ), /* @__PURE__ */ import_react35.default.createElement(
+      Route,
+      {
         path: "/expense_items/new",
         element: /* @__PURE__ */ import_react35.default.createElement(FormContainer_default, null)
       }
@@ -30058,6 +30139,12 @@ Please change the parent <Route path="${parentPath}"> to <Route path="${parentPa
       {
         path: "/expense_items/:id",
         element: /* @__PURE__ */ import_react35.default.createElement(Show_default, null)
+      }
+    ), /* @__PURE__ */ import_react35.default.createElement(
+      Route,
+      {
+        path: "/expense_items/:id/edit",
+        element: /* @__PURE__ */ import_react35.default.createElement(FormContainer_default, null)
       }
     )));
   };

@@ -11,3 +11,25 @@ export const deleteExpenseItem = (id) => {
         `${API_BASE_URL}/expense_items/${id}`
     );
 }
+
+export const getExpenseItem = (id) => {
+    return axios.get(
+        `${API_BASE_URL}/expense_items/${id}`
+    )
+}
+
+export const saveExpenseItem = (expenseItem) => {
+    if (expenseItem.id) {
+        // Update
+        return axios.put(
+            `${API_BASE_URL}/expense_items/${expenseItem.id}`,
+            expenseItem
+        )
+    } else {
+        // Create
+        return axios.post(
+            `${API_BASE_URL}/expense_items`,
+            expenseItem
+        )
+    }
+}
